@@ -5,7 +5,7 @@
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // constants
-const int threshold = 100;
+const int threshold = 500;
 const int midiChannel = 1;
 
 // class declaration to make multiple instances of
@@ -41,6 +41,7 @@ void Piezo::listen_analog() {
   if (sensorReading >= threshold) {
     int sensorVelocity = map_midi(sensorReading);
     send_message(midiNote, sensorVelocity);
+   
   }
 }
 
@@ -50,8 +51,8 @@ void Piezo::listen_analog() {
 
 // declare all the analog pins as Piezo class instances w/
 // pin numbers and midi note values
-Piezo piezo0(A0, 1);
-/*Piezo piezo0(A1, 2);
+/*Piezo piezo0(A0, 1);
+Piezo piezo0(A1, 2);
 Piezo piezo0(A2, 3);
 Piezo piezo0(A3, 4);
 Piezo piezo0(A4, 5);
@@ -62,16 +63,17 @@ Piezo piezo0(A8, 9);
 Piezo piezo0(A9, 10);
 Piezo piezo0(A10, 11);
 Piezo piezo0(A11, 12);
-Piezo piezo0(A12, 13);
+Piezo piezo0(A12, 13);*/
 Piezo piezo0(A13, 14);
-Piezo piezo0(A14, 15);
-Piezo piezo0(A15, 16);*/
+Piezo piezo1(A14, 15);
+/*Piezo piezo0(A15, 16);*/
 
 void setup() {
-  
+  Serial.begin(31250);
 }
 
 void loop() {
   piezo0.listen_analog();
+  piezo1.listen_analog();
   
 }
