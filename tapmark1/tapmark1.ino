@@ -54,6 +54,9 @@ void Piezo::listen_analog() {
 
 // declare all the analog pins as Piezo class instances w/
 // pin numbers and midi note values
+
+// Can't use pins 0 or 6 so we need to use 1-5 + 7-10
+
 Piezo piezo0(A0, 10);
 /*Piezo piezo1(A1, 20);
 Piezo piezo2(A2, 30);
