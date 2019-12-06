@@ -54,8 +54,8 @@ void Piezo::listen_analog() {
 
 // declare all the analog pins as Piezo class instances w/
 // pin numbers and midi note values
-/*Piezo piezo0(A0, 10);
-Piezo piezo1(A1, 20);
+Piezo piezo0(A0, 10);
+/*Piezo piezo1(A1, 20);
 Piezo piezo2(A2, 30);
 Piezo piezo3(A3, 40);
 Piezo piezo4(A4, 50);
@@ -68,13 +68,13 @@ Piezo piezo10(A10, 110);
 Piezo piezo11(A11, 120);
 Piezo piezo12(A12, 130);
 Piezo piezo13(A13, 140);
-Piezo piezo14(A14, 150);*/
-Piezo piezo15(A15, 160);
+Piezo piezo14(A14, 150);
+Piezo piezo15(A15, 160);*/
 
 void setup() {
   
 }
 
 void loop() {
-  piezo15.listen_analog();
+  piezo0.listen_analog();  
 }
