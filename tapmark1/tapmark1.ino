@@ -6,7 +6,7 @@
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // constants
-const int threshold = 500;
+const int threshold = 1023;
 const int midiChannel = 1;
 
 // class declaration to make multiple instances of
@@ -40,26 +40,12 @@ int map_midi(int sensorVal) {
 // piezo returns below threshold
 
 // listen for input; class scope
-/*void Piezo::listen_analog() {
-  int sensorReading = analogRead(pinNum);
-  bool triggered = false;
-  if (sensorReading >= threshold) {
-    int sensorVelocity = 127; //map_midi(sensorReading);
-    send_message(midiNote, sensorVelocity);
-    triggered = true;
-  }
-  while (triggered) {
-    
-  }
-}
-*/
 void Piezo::listen_analog() {
   int sensorReading = analogRead(pinNum);
-  bool triggered = false;
   if (sensorReading >= threshold) {
     int sensorVelocity = 127; //map_midi(sensorReading);
     send_message(midiNote, sensorVelocity);
-    triggered = true;
+    delay(500);
   }
 }
 
@@ -82,18 +68,21 @@ Piezo piezo7(A8, 70);
 Piezo piezo8(A9, 80);
 Piezo piezo9(A10, 90);
 
+// code that runs once at power on
 void setup() {
-  
+  // midi won't send without this
+  Serial.begin(31250);
 }
 
+// code that loops as long as board is powered
 void loop() {
   piezo1.listen_analog();
   piezo2.listen_analog();
-  piezo3.listen_analog();
+  //piezo3.listen_analog();
   piezo4.listen_analog();
   piezo5.listen_analog();
   piezo6.listen_analog();
   piezo7.listen_analog();
-  piezo8.listen_analog();
+  //piezo8.listen_analog();
   piezo9.listen_analog();
 }
