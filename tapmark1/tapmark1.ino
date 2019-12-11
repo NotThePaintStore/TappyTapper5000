@@ -2,6 +2,7 @@
 
 #include <MIDI.h>
 
+// activate the midi library
 MIDI_CREATE_DEFAULT_INSTANCE();
 
 // constants
@@ -24,27 +25,41 @@ class Piezo {
  * Begin function declarations *
  *******************************/
 
-// sends the midi message; global scope
+// send the midi message; global scope
 void send_message(int note, int velocity) {
   MIDI.sendNoteOn(note, velocity, midiChannel);
-  //delay(1000); // might not need this
 }
 
-// maps analog value to velocity value; global scope
+// map analog value to velocity value; global scope
 int map_midi(int sensorVal) {
   int velocity = map(sensorVal,threshold,1023,1,127);
   return velocity;
 }
 
-/* we need to wait to send another message until value of piezo returns below threshold */
+// we need to wait to send another message until value of
+// piezo returns below threshold
 
-// listens for input; belongs to the class scope
+// listen for input; class scope
+/*void Piezo::listen_analog() {
+  int sensorReading = analogRead(pinNum);
+  bool triggered = false;
+  if (sensorReading >= threshold) {
+    int sensorVelocity = 127; //map_midi(sensorReading);
+    send_message(midiNote, sensorVelocity);
+    triggered = true;
+  }
+  while (triggered) {
+    
+  }
+}
+*/
 void Piezo::listen_analog() {
   int sensorReading = analogRead(pinNum);
+  bool triggered = false;
   if (sensorReading >= threshold) {
-    int sensorVelocity = map_midi(sensorReading);
+    int sensorVelocity = 127; //map_midi(sensorReading);
     send_message(midiNote, sensorVelocity);
-   
+    triggered = true;
   }
 }
 
@@ -57,27 +72,28 @@ void Piezo::listen_analog() {
 
 // Can't use pins 0 or 6 so we need to use 1-5 + 7-10
 
-Piezo piezo0(A0, 10);
-/*Piezo piezo1(A1, 20);
-Piezo piezo2(A2, 30);
-Piezo piezo3(A3, 40);
-Piezo piezo4(A4, 50);
-Piezo piezo5(A5, 60);
-Piezo piezo6(A6, 70);
-Piezo piezo7(A7, 80);
-Piezo piezo8(A8, 90);
-Piezo piezo9(A9, 100);
-Piezo piezo10(A10, 110);
-Piezo piezo11(A11, 120);
-Piezo piezo12(A12, 130);
-Piezo piezo13(A13, 140);
-Piezo piezo14(A14, 150);
-Piezo piezo15(A15, 160);*/
+Piezo piezo1(A1, 10);
+Piezo piezo2(A2, 20);
+Piezo piezo3(A3, 30);
+Piezo piezo4(A4, 40);
+Piezo piezo5(A5, 50);
+Piezo piezo6(A7, 60);
+Piezo piezo7(A8, 70);
+Piezo piezo8(A9, 80);
+Piezo piezo9(A10, 90);
 
 void setup() {
   
 }
 
 void loop() {
-  piezo0.listen_analog();  
+  piezo1.listen_analog();
+  piezo2.listen_analog();
+  piezo3.listen_analog();
+  piezo4.listen_analog();
+  piezo5.listen_analog();
+  piezo6.listen_analog();
+  piezo7.listen_analog();
+  piezo8.listen_analog();
+  piezo9.listen_analog();
 }
