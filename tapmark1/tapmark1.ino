@@ -28,6 +28,7 @@ class Piezo {
 // send the midi message; global scope
 void send_message(int note, int velocity) {
   MIDI.sendNoteOn(note, velocity, midiChannel);
+  delay(3000);
 }
 
 // map analog value to velocity value; global scope
@@ -45,7 +46,6 @@ void Piezo::listen_analog() {
   if (sensorReading >= threshold) {
     int sensorVelocity = 127; //map_midi(sensorReading);
     send_message(midiNote, sensorVelocity);
-    delay(500);
   }
 }
 
@@ -56,13 +56,13 @@ void Piezo::listen_analog() {
 // declare all the analog pins as Piezo class instances w/
 // pin numbers and midi note values
 
-// Can't use pins 0 or 6 so we need to use 1-5 + 7-10
+// Using pins 7-15
 
-Piezo piezo1(A1, 10);
-Piezo piezo2(A2, 20);
-Piezo piezo3(A3, 30);
-Piezo piezo4(A4, 40);
-Piezo piezo5(A5, 50);
+Piezo piezo1(A11, 10);
+Piezo piezo2(A12, 20);
+Piezo piezo3(A13, 30);
+Piezo piezo4(A14, 40);
+Piezo piezo5(A15, 50);
 Piezo piezo6(A7, 60);
 Piezo piezo7(A8, 70);
 Piezo piezo8(A9, 80);
@@ -77,12 +77,12 @@ void setup() {
 // code that loops as long as board is powered
 void loop() {
   piezo1.listen_analog();
-  piezo2.listen_analog();
-  //piezo3.listen_analog();
+  //piezo2.listen_analog();
+  piezo3.listen_analog();
   piezo4.listen_analog();
   piezo5.listen_analog();
-  piezo6.listen_analog();
+  //piezo6.listen_analog();
   piezo7.listen_analog();
-  //piezo8.listen_analog();
+  piezo8.listen_analog();
   piezo9.listen_analog();
 }
